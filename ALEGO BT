@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TradingBotConfig>
+    <!-- API Configuration -->
+    <APIConfig>
+        <Platform>Deriv</Platform>
+        <APIKey>YourAPIKeyHere</APIKey>
+        <APISecret>YourAPISecretHere</APISecret>
+        <AccountID>YourAccountIDHere</AccountID>
+        <MaxAPICallsPerMinute>100</MaxAPICallsPerMinute>
+    </APIConfig>
+
+    <!-- Risk Management -->
+    <RiskManagement>
+        <MaxDailyLoss>5</MaxDailyLoss> <!-- Percentage of capital to risk in a day -->
+        <MaxTradeLoss>2</MaxTradeLoss> <!-- Max percentage loss per trade -->
+        <PositionSizing>
+            <Type>Percentage</Type>
+            <Percentage>1</Percentage> <!-- 1% of balance per trade -->
+        </PositionSizing>
+        <StopLoss>5</StopLoss> <!-- Stop after 5% loss -->
+        <TakeProfit>10</TakeProfit> <!-- Take profit after 10% gain -->
+    </RiskManagement>
+
+    <!-- Strategy Configuration -->
+    <TradingStrategy>
+        <Name>MovingAverageCrossover</Name> <!-- Example Strategy Name -->
+        <Type>IndicatorBased</Type>
+        <Indicators>
+            <Indicator>
+                <Name>MovingAverage</Name>
+                <Type>SMA</Type>
+                <Period>14</Period>
+                <Action>Crossover</Action>
+                <Threshold>50</Threshold> <!-- Crossover threshold -->
+            </Indicator>
+            <Indicator>
+                <Name>RSI</Name>
+                <Type>RelativeStrengthIndex</Type>
+                <Period>14</Period>
+                <Overbought>70</Overbought>
+                <Oversold>30</Oversold>
+            </Indicator>
+        </Indicators>
+        <TradeConditions>
+            <Condition>
+                <Indicator>MovingAverage</Indicator>
+                <Action>CrossAbove</Action> <!-- Buy Signal when SMA crosses above -->
+            </Condition>
+            <Condition>
+                <Indicator>RSI</Indicator>
+                <Action>CrossBelow</Action> <!-- Sell Signal when RSI crosses below 30 -->
+            </Condition>
+        </TradeConditions>
+    </TradingStrategy>
+
+    <!-- Execution Settings -->
+    <ExecutionSettings>
+        <TradeDuration>60</TradeDuration> <!-- Binary options duration in seconds -->
+        <AssetPair>EURUSD</AssetPair>
+        <TradeType>CallPut</TradeType> <!-- Call or Put option for binary options -->
+        <TradeSize>10</TradeSize> <!-- Amount to trade per option -->
+    </ExecutionSettings>
+
+    <!-- Alerts & Notifications -->
+    <Notifications>
+        <EmailAlerts>True</EmailAlerts>
+        <SMSAlerts>False</SMSAlerts>
+        <TradeAlerts>
+            <Success>True</Success>
+            <Failure>True</Failure>
+        </TradeAlerts>
+    </Notifications>
+
+    <!-- Logging & Analytics -->
+    <Logging>
+        <EnableLogging>True</EnableLogging>
+        <LogLevel>INFO</LogLevel> <!-- INFO, DEBUG, ERROR, etc. -->
+        <LogFilePath>/path/to/logs/trading_bot.log</LogFilePath>
+    </Logging>
+
+    <!-- Backtesting Settings -->
+    <Backtesting>
+        <EnableBacktesting>True</EnableBacktesting>
+        <StartDate>2025-01-22</StartDate>
+        <EndDate>2025-12-31</EndDate>
+        <DataFrequency>1m</DataFrequency> <!-- 1-minute candle data for backtesting -->
+    </Backtesting>
+
+    <!-- Advanced Features -->
+    <Advanced>
+        <EnableMachineLearning>False</EnableMachineLearning> <!-- Future feature: machine learning for predictions -->
+    </Advanced>
+
+</TradingBotConfig>
